@@ -1,0 +1,30 @@
+SETUP (python3, sqlite3)
+1 - pip install -r requirements.txt
+2 - python manage.py makemigrations
+3 - python manage.py migrate
+4 - python manage.py runserver (this will start dev server at port 8000)
+
+If there is an error after step 2, please follow steps below
+1 - python manage.py makemigrations
+2 - python manage.py makemigrations role
+3 - python manage.py makemigrations resource
+4 - python manage.py migrate
+
+
+Documentation
+1- /admin/ to manage entries in tables
+2- Api's are as follows
+ a)/role/
+   i)Get user role, GET (params 'user_id')
+   j)Create new role, POST (request json = {"role_name":<str>, "resource_list":[[id, permission],......]})
+   k)Assign new role to user, PUT (request json = {"user_id":<int>, "role_id"<int>})
+   l)Remove role from user, DELETE (request json = {"user_id":<int>, "role_id"<int>})
+
+ b)/user/access/
+   i)Check if user has access to this resource, GET (params 'user_id', 'resource_id', 'permission'(enum))
+
+
+Assumptions
+1 - There is entry in resource table for every available resource.
+2 - Authentication should be handled separately on the basis of username and password(not enforced).
+
